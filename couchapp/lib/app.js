@@ -8,6 +8,6 @@ module.exports = {
     /*validate_doc_update: require('./validate'),*/
     evently: require('./evently'),
     fulltext: require('./fulltext'),
-    vendor: require('./vendors'),
+    vendor: require('./vendor'),
     views: require('./views')
 };
