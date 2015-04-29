@@ -30,13 +30,13 @@ disc=1/1
 }
 
 getmeta() {
-      ARTIST="`ffmetadata|grep 'artist='       |sed 's/^artist=//'      |tr '"' "'"`"
-       TITLE="`ffmetadata|grep 'title='        |sed 's/^title=//'       |tr '"' "'"`"
-       ALBUM="`ffmetadata|grep 'album='        |sed 's/^album=//'       |tr '"' "'"`"
-ALBUM_ARTIST="`ffmetadata|grep 'album_artist=' |sed 's/^album_artist=//'|tr '"' "'"`"
-       GENRE="`ffmetadata|grep 'genre='        |sed 's/^genre=//'       |tr '"' "'"`"
-       TRACK="`ffmetadata|grep 'track='        |sed 's/^track=//'       |tr '"' "'"`"
-        DISC="`ffmetadata|grep 'disc='         |sed 's/^disc=//'        |tr '"' "'"`"
+      ARTIST="`ffmetadata|grep '^artist='       |sed 's/^artist=//'      |tr '"' "'"`"
+       TITLE="`ffmetadata|grep '^title='        |sed 's/^title=//'       |tr '"' "'"`"
+       ALBUM="`ffmetadata|grep '^album='        |sed 's/^album=//'       |tr '"' "'"`"
+ALBUM_ARTIST="`ffmetadata|grep '^album_artist=' |sed 's/^album_artist=//'|tr '"' "'"`"
+       GENRE="`ffmetadata|grep '^genre='        |sed 's/^genre=//'       |tr '"' "'"`"
+       TRACK="`ffmetadata|grep '^track='        |sed 's/^track=//'       |tr '"' "'"`"
+        DISC="`ffmetadata|grep '^disc='         |sed 's/^disc=//'        |tr '"' "'"`"
     [ "x" != "x${ARTIST}" ] &&             ARTIST="\"artist\":      \"${ARTIST}\","
     [ "x" != "x${TITLE}" ] &&               TITLE="\"title\":       \"${TITLE}\","
     [ "x" != "x${ALBUM}" ] &&               ALBUM="\"album\":       \"${ALBUM}\","
