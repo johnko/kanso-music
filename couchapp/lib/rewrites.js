@@ -23,6 +23,10 @@ module.exports = [{
     "from": "_db/*",
     "to": "../../*"
 }, {
+    "description": "Access to the _design prefix",
+    "from": "_design/*",
+    "to": "../../_design/*"
+}, {
     "description": "Access to this design document",
     "from": "_ddoc",
     "to": ""

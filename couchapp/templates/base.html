@@ -77,6 +77,7 @@
     </script>
     <script src="./vendor/couchapp/loader.js"></script>
     <script type="text/javascript" charset="utf-8">
+        /*
         var splitUrl = document.location.href.split('/');
         var designPos = splitUrl.indexOf('_design');
         if (designPos > 4) {
@@ -86,7 +87,9 @@
             }
             $.couch.urlPrefix = newPrefix;
         }
-        //(document.location.href.split('/')[5] == '_design') ? '/' + document.location.href.split('/')[3] : '';
+        */
+
+        $.couch.urlPrefix = "./";
         $.couch.app(function(app) {
             var customAccount = $.extend(true, {}, app.ddoc.vendor.couchapp.evently.account, {
                 loggedOut: app.ddoc.vendor.couchapp.evently.account.loginForm
@@ -107,7 +110,7 @@
             $.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
             $.evently.connect("#searchBox", "#list", ["setList"]);
         }, {
-            db: "personal",
+            db: "_db",
             design: "music"
         });
 
