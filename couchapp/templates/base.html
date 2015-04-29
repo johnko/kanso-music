@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+
+    <title>Cloudbox</title>
+
+    <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./static/css/cloudbox.css" />
+</head>
+
+<body>
+
+    <div id="header">
+        <div id="player"></div>
+
+        <h1>Cloudbox</h1>
+
+        <div id="searchBox"></div>
+
+        <div class="spacer"></div>
+    </div>
+
+    <div id="account"></div>
+
+    <div id="list"></div>
+
+    <div id="aboutLinkContainer">
+        <a href="" id="aboutLink">About</a>
+    </div>
+
+    <div id="about" style="display:none">
+        <a href="" id="aboutCloseLink">Close</a>
+
+        <h1>This is Cloudbox 0.1</h1>
+
+        <p>
+            Copyright &copy; 2010 <a href="mailto:martin.kirch@gmail.com">Martin
+Kirchgessner</a>
+        </p>
+
+        <p>
+            Cloudbox is a cloudy jukebox (hence the name). It is released under the
+            <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT License</a> and powered by
+            <a href="http://couchdb.apache.org/" target="_blank">CouchDB</a>,
+            <a href="http://github.com/couchapp/couchapp" target="_blank">CouchApp</a> and the
+            <a href="http://github.com/couchapp/couchapp" target="_blank">Evently</a> framework.
+        </p>
+
+        <p>
+            <a href="http://github.com/martinkirch/CloudBox" target="_blank">http://github.com/martinkirch/CloudBox</a>
+        </p>
+    </div>
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- json2.js; add JSON if not exist; from https://github.com/douglascrockford/JSON-js -->
+    <script src="./static/js/json2.js"></script>
+
+    <!-- jquery -->
+    <script src="./static/js/jquery-1.11.2.min.js"></script>
+
+    <!-- bootstrap.min.js; requires jquery -->
+    <script src="./static/js/bootstrap.min.js"></script>
+
+    <!-- modules for require -->
+    <script src="./modules.js"></script>
+
+    <script>
+        // in case the above don't load
+        // redirect to _rewrite if we have no trailing slash
+        if (window.location.href.match(/\/_rewrite$/) !== null) location.href += '/';
+
+    </script>
+    <script src="./vendor/couchapp/loader.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var splitUrl = document.location.href.split('/');
+        var designPos = splitUrl.indexOf('_design');
+        if (designPos > 4) {
+            var newPrefix = "";
+            for (var i = 3; i < (designPos - 1); i++) {
+                newPrefix += "/" + splitUrl[i];
+            }
+            $.couch.urlPrefix = newPrefix;
+        }
+        //(document.location.href.split('/')[5] == '_design') ? '/' + document.location.href.split('/')[3] : '';
+        $.couch.app(function(app) {
+            var customAccount = $.extend(true, {}, app.ddoc.vendor.couchapp.evently.account, {
+                loggedOut: app.ddoc.vendor.couchapp.evently.account.loginForm
+            });
+
+            $("#account").evently(customAccount);
+
+            $("#player").evently("player", app);
+            $.evently.connect("#account", "#player", ["loggedIn", "loggedOut"]);
+
+            $("#list").evently("list", app);
+            $.evently.connect("#account", "#list", ["loggedIn", "loggedOut"]);
+
+            $.evently.connect("#list", "#player", ["play"]);
+            $.evently.connect("#player", "#list", ["next", "previous"]);
+
+            $("#searchBox").evently("searchBox", app);
+            $.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
+            $.evently.connect("#searchBox", "#list", ["setList"]);
+        }, {
+            db: "personal",
+            design: "music"
+        });
+
+        $('#aboutLink').click(function(e) {
+            $('#about').fadeIn();
+            e.preventDefault();
+        });
+
+        $('#aboutCloseLink').click(function(e) {
+            $('#about').fadeOut();
+            e.preventDefault();
+        });
+
+    </script>
+</body>
+
+</html>

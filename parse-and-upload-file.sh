@@ -88,13 +88,13 @@ fi
 JSON="{\"sha512\":\"${BHASH}\",${ARTIST}${TITLE}${ALBUM}${ALBUM_ARTIST}${GENRE}${TRACK}${DISC}\"type\":\"${TYPE}\",\"content_type\":\"${MIME}\"}"
 
 # put first to get doc.rev
-REV=`curl   -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH} | tr -d '\n' | egrep -o '"rev":"(.*)"' | awk -F'"' '{print $4}'`
+REV=`curl   -k -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH} | tr -d '\n' | egrep -o '"rev":"(.*)"' | awk -F'"' '{print $4}'`
 
 # not upload file data
 if [ "x" == "x${REV}" ]; then
-    curl -v -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH}
+    curl -v -k -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH}
     echo "Something went wrong, here's the JSON so you can take a look"
     echo "${JSON}"
 else
-    curl -H "Content-Type: ${MIME}" -X PUT --data-binary @"${FILE}" "${COUCHDBURL}/${HEXHASH}/${SAFENAME}?rev=${REV}"
+    curl -k -H "Content-Type: ${MIME}" -X PUT --data-binary @"${FILE}" "${COUCHDBURL}/${HEXHASH}/${SAFENAME}?rev=${REV}"
 fi

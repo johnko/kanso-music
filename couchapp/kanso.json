@@ -1,9 +1,28 @@
 {
     "name": "music",
-    "version": "0.1.0",
+    "version": "0.2.0",
+    "realname": "CloudBox",
     "description": "A couchapp made to enjoy music... relaxed on a couch.",
-    "dependencies": {
-        "traditional-couchapp": "~0.1.0"
+    "attachments": ["static", "vendor"],
+    "dust": {
+        "templates": "templates"
     },
-    "traditional-couchapp": "."
+    "duality": {
+        "base_template": "base.html"
+    },
+    "load": "lib/app",
+    "modules": ["lib"],
+    "dependencies": {
+        "attachments": null,
+        "modules": null,
+        "properties": null,
+        "couchtypes": null,
+        "settings": null,
+        "duality": null,
+        "dust": null,
+        "duality-dust": null,
+        "kanso-topbar": null,
+        "users": null,
+        "session": null
+    }
 }
