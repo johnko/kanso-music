@@ -1,5 +1,4 @@
-function(e)
-{
-	$(this).trigger('previous');
-	return false;
+function(e) {
+    $(this).trigger('previous');
+    return false;
 }

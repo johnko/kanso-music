@@ -59,38 +59,39 @@
 <script src="vendor/couchapp/loader.js"></script>
 <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
-    	var customAccount = $.extend(true, {}, app.ddoc.vendor.couchapp.evently.account, {
-    		loggedIn: {
-    			mustache: "<span>Welcome {{name}}! <a id='logoutLink' href='#logout'>Logout</a></span>"
-    		},
-    		loggedOut: app.ddoc.vendor.couchapp.evently.account.loginForm
-    	});
+        var customAccount = $.extend(true, {}, app.ddoc.vendor.couchapp.evently.account, {
+            loggedIn: {
+                mustache: "<span>Welcome {{name}}! <a id='logoutLink' href='#logout'>Logout</a></span>"
+            },
+            loggedOut: app.ddoc.vendor.couchapp.evently.account.loginForm
+        });
 
-    	$("#account").evently(customAccount);
+        $("#account").evently(customAccount);
 
-    	$("#player").evently("player", app);
-    	$.evently.connect("#account", "#player", ["loggedIn", "loggedOut"]);
+        $("#player").evently("player", app);
+        $.evently.connect("#account", "#player", ["loggedIn", "loggedOut"]);
 
-    	$("#list").evently("list", app);
-    	$.evently.connect("#account", "#list", ["loggedIn", "loggedOut"]);
+        $("#list").evently("list", app);
+        $.evently.connect("#account", "#list", ["loggedIn", "loggedOut"]);
 
-    	$.evently.connect("#list", "#player", ["play"]);
-    	$.evently.connect("#player", "#list", ["next", "previous"]);
+        $.evently.connect("#list", "#player", ["play"]);
+        $.evently.connect("#player", "#list", ["next", "previous"]);
 
-    	$("#searchBox").evently("searchBox", app);
-    	$.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
-    	$.evently.connect("#searchBox", "#list", ["setList"]);
+        $("#searchBox").evently("searchBox", app);
+        $.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
+        $.evently.connect("#searchBox", "#list", ["setList"]);
     });
 
     $('#aboutLink').click(function(e) {
-    	$('#about').fadeIn();
-    	e.preventDefault();
+        $('#about').fadeIn();
+        e.preventDefault();
     });
 
     $('#aboutCloseLink').click(function(e) {
-    	$('#about').fadeOut();
-    	e.preventDefault();
+        $('#about').fadeOut();
+        e.preventDefault();
     });
+
 </script>
 
 </html>

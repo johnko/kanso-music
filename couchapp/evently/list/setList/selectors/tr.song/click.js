@@ -1,4 +1,3 @@
-function(e)
-{
-	$(this).trigger('play', $(this).data('doc'));
+function(e) {
+    $(this).trigger('play', $(this).data('doc'));
 }

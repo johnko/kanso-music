@@ -1,4 +1,3 @@
-function(e)
-{
-	$(this).trigger('next');
+function(e) {
+    $(this).trigger('next');
 }

@@ -1,27 +1,23 @@
-#player
-{
-	float:right;
-	max-width:33%;
+#player {
+    float: right;
+    max-width: 33%;
 }
 
-#player img
-{
-	float:left;
-	height:4em;
+#player img {
+    float: left;
+    height: 4em;
 }
 
-#player a
-{
-	text-decoration:none;
-	color:white;
-	font-weight:bold;
-	padding:0.2em;
-	background:#ddd;
-/*	vertical-align:top;*/
+#player a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.2em;
+    background: #ddd;
+    /*	vertical-align:top;*/
 }
 
-#player a:hover
-{
-	background:white;
-	color:black;
+#player a:hover {
+    background: white;
+    color: black;
 }

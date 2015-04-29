@@ -1,7 +1,6 @@
-#searchBox input
-{
-	position:absolute;
-	width:33%;
-	top:1em;
-	left:33%;
+#searchBox input {
+    position: absolute;
+    width: 33%;
+    top: 1em;
+    left: 33%;
 }

@@ -1,50 +1,42 @@
 /** song list **/
 
-#list table
-{
-	clear: both;
-	width: 96%;
-	border-collapse: collapse;
-	border-spacing: 0;
-	border: 1px solid #eee;
-	margin: 0.5em 2%;
-	-moz-box-shadow: 5px 5px 12px rgba(0,0,0,.15);
-	-webkit-box-shadow: 5px 5px 12px rgba(0,0,0,0.15);
-	box-shadow: 5px 5px 12px rgba(0,0,0,.15);
+#list table {
+    clear: both;
+    width: 96%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #eee;
+    margin: 0.5em 2%;
+    -moz-box-shadow: 5px 5px 12px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, .15);
 }
 
-#list td, #list th
-{
-	padding: .25em 1em;
-	vertical-align: middle;
-	text-align: left;
+#list td, #list th {
+    padding: .25em 1em;
+    vertical-align: middle;
+    text-align: left;
 }
 
-#list th
-{
-	font-weight:bold;
+#list th {
+    font-weight: bold;
 }
 
 #list tr.l0 {
-	background: #eee;
+    background: #eee;
 }
 
 #list tr.l1 {
-	background: #fff;
+    background: #fff;
 }
 
-#list tr.song:hover
-{
-	background:#ddd;
+#list tr.song:hover {
+    background: #ddd;
 }
 
-#list .artist, #list .title
-{
-	
-}
+#list .artist, #list .title {}
 
-#list .nowPlaying td
-{
-	background: #000;
-	color: #fff;
+#list .nowPlaying td {
+    background: #000;
+    color: #fff;
 }

@@ -1,20 +1,16 @@
-#account
-{
-	padding:0.5em 1em;
+#account {
+    padding: 0.5em 1em;
 }
 
-#account form
-{
-	width:20em;
-	margin:auto;
+#account form {
+    width: 20em;
+    margin: auto;
 }
 
-#account input[type=text], #account input[type=password]
-{
-	display:block;
+#account input[type=text], #account input[type=password] {
+    display: block;
 }
 
-a#logoutLink
-{
-	float:right;
+a#logoutLink {
+    float: right;
 }

@@ -1,5 +1,4 @@
-function(e)
-{
-	$(this).trigger('next');
-	return false;
+function(e) {
+    $(this).trigger('next');
+    return false;
 }
