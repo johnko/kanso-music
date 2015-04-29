@@ -1,0 +1,9 @@
+{
+    "name": "music",
+    "version": "0.1.0",
+    "description": "A couchapp made to enjoy music... relaxed on a couch.",
+    "dependencies": {
+        "traditional-couchapp": "~0.1.0"
+    },
+    "traditional-couchapp": "."
+}
