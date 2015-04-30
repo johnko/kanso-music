@@ -1,7 +1,8 @@
 # The MIT License
 
-Unless stated otherwise, all files under this directory are under copyright 
+Unless stated otherwise, all files under this directory are under copyright
 (c) 2010 Martin Kirchgessner <martin.kirch@gmail.com>
+Some modifications (c) 2015 John Ko
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

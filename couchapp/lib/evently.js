@@ -141,32 +141,29 @@ exports.player = {
 
 exports.searchBox = {
     search: function(e, query) {
-        /* TODO : maybe there's a better way to query couchdb-lucene... ? */
+        var reqUrl;
         if (!query || query === '') {
-            return;
+            // show all songs
+            reqUrl = "./_ddoc/_view/songs?include_docs=true";
+        } else {
+            // search by title
+            reqUrl = "./_ddoc/_view/titles?startkey=" + encodeURIComponent('"' + query.toLowerCase() + '"') +
+                "&endkey=" + encodeURIComponent('"' + query.toUpperCase() + '\\ufff0' + '"') +
+                "&include_docs=true";
         }
         var app = $$(this).app;
         var widget = $(this);
-        /* TODO : protect "query". lucene is sensitive */
-        var reqUrl = app.db.uri + '_fti/' + app.ddoc._id + '/songs?q=' + encodeURIComponent(query) + '&include_docs=true';
         $.ajax({
             type: "GET",
             url: reqUrl,
-            complete: function(req) {
-                var resp = $.httpData(req, "json");
-
-                if (req.status >= 400)
-                    alert("Error while requesting couchdb-lucene : " + resp.reason);
-                else {
-                    var doc;
-
-                    var list = resp.rows.map(function(r) {
-                        doc = r.doc;
-                        return doc;
-                    });
-
-                    widget.trigger('setList', [list]);
-                }
+            success: function(data) {
+                var resp = JSON.parse(data);
+                var doc;
+                var list = resp.rows.map(function(r) {
+                    doc = r.doc;
+                    return doc;
+                });
+                widget.trigger('setList', [list]);
             }
         });
     },
@@ -182,17 +179,17 @@ exports.searchBox = {
                     if (input.val() == 'Search...') input.val('');
                 },
                 keyup: function(e) {
-                    $.log("keyup!");
+                    //$.log("keyup!");
                     var elem = $(this);
                     if (elem.data('value') == elem.val()) /* no value change since last call */
                         return;
                     elem.data('value', elem.val());
                     if (elem.data('timer')) {
                         clearTimeout(elem.data('timer'));
-                        $.log("cleared");
+                        //$.log("cleared");
                     }
                     elem.data('timer', setTimeout(function() {
-                        $.log("triggered");
+                        //$.log("triggered");
                         elem.data('timer', null);
                         elem.trigger('search', elem.val());
                     }, 500));

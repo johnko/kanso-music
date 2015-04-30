@@ -1,3 +1,6 @@
+/*
+ *This shim is from the original CouchApp
+ */
 module.exports = {
     "README": "## CouchApp - more than just a filesystem mapper\n\nThis is where documentation will go for the client and server JavaScript parts of CouchApp.",
     "metadata": {
