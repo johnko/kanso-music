@@ -1,20 +1,128 @@
+/*** GLOBAL ***/
+
+body {
+    margin: 1em;
+}
+
+footer {
+    border-top: solid 1px #B3B3B3;
+    clear: both;
+    padding: 1em 0;
+    margin: 3em 0 0 0;
+    font-size: 0.6em;
+}
+/*** Cloudbox ***/
+
+.navbar {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    background-color: #333 !important;
+    border-color: #111 !important;
+}
+}
+@media (max-width: 991px) {
+    .navbar {
+        width: 96%;
+    }
+}
+@media (min-width: 992px) {
+    .navbar {
+        width: 98%;
+    }
+}
+.bodypaddingtop {
+    height: 4.5em;
+}
+@media (min-width: 601px) {
+    #page-menu {
+        min-height: 3em;
+    }
+    
+    #kanso-topbar-session {
+        right: 1em!important;
+    }
+}
+@media (min-width: 768px) {
+    .navbar-header {
+        float: none !important;
+    }
+}
+/*** PLAYER ***/
+
+@media (max-width: 767px) {
+    #player audio {
+        width: 45%;
+    }
+}
+@media (min-width: 768px) {
+    #player a, #player audio {
+        margin-top: 0.8em;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    #player audio {
+        width: 52%;
+    }
+}
+@media (min-width: 992px) {
+    #player audio {
+        width: 54%;
+    }
+}
+#player img {
+    float: left;
+    height: 3.6em;
+}
+#player a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.2em;
+    background-color: #555;
+    float: left;
+    /*	vertical-align:top;*/
+}
+#player a:hover {
+    background-color: #eee;
+    color: #111;
+}
+/*** SEARCHBOX ***/
+
+#searchBox {
+    float: right;
+    width: 33%;
+}
+#searchBox input {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    #searchBox input {
+        margin-top: 0.8em;
+    }
+}
+/*** account ***/
+
 #account {
     padding: 0.5em 1em;
 }
-
 #account form {
     width: 20em;
     margin: auto;
 }
-
 #account input[type=text], #account input[type=password] {
     display: block;
 }
-
 a#logoutLink {
     float: right;
 }
 /** song list **/
+/*tr.nowPlaying {
+    position: fixed;
+    top: 0;
+    left: 1.4em;
+    font-size: 0.7em;
+}*/
 
 #list table {
     clear: both;
@@ -27,31 +135,24 @@ a#logoutLink {
     -webkit-box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.15);
     box-shadow: 5px 5px 12px rgba(0, 0, 0, .15);
 }
-
 #list td, #list th {
     padding: .25em 1em;
     vertical-align: middle;
     text-align: left;
 }
-
 #list th {
     font-weight: bold;
 }
-
 #list tr.l0 {
     background: #eee;
 }
-
 #list tr.l1 {
     background: #fff;
 }
-
 #list tr.song:hover {
     background: #ddd;
 }
-
 #list .artist, #list .title {}
-
 #list .nowPlaying td {
     background: #000;
     color: #fff;
@@ -68,50 +169,13 @@ a#logoutLink {
     left: 50%;
     width: 30em;
 }
-
 #aboutLinkContainer {
-    text-align: center;
-    font-size: 80%;
-    padding: 1em;
+    float: right;
+    width: 50%;
 }
-
 #aboutCloseLink {
     float: right;
 }
-
 #about p {
     margin-top: 1em;
-}
-/*** PLAYER ***/
-
-#player {
-    float: right;
-    max-width: 33%;
-}
-
-#player img {
-    float: left;
-    height: 4em;
-}
-
-#player a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em;
-    background: #ddd;
-    /*	vertical-align:top;*/
-}
-
-#player a:hover {
-    background: white;
-    color: black;
-}
-/*** SEARCHBOX ***/
-
-#searchBox input {
-    position: absolute;
-    width: 33%;
-    top: 1em;
-    left: 33%;
 }

@@ -45,6 +45,10 @@ module.exports = [{
     "from": "_session",
     "to": "../../../_session"
 }, {
+    "description": "Users handler",
+    "from": "_users/*",
+    "to": "../../../_users/*"
+}, {
     "description": "Home page",
     "from": "/",
     "to": "_show/index"

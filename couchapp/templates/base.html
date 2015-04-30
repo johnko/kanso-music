@@ -8,27 +8,52 @@
 
     <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./static/css/cloudbox.css" />
+    <link rel="stylesheet" type="text/css" href="./static/css/nav2.css" />
 </head>
 
 <body>
-
-    <div id="header">
-        <div id="player"></div>
-
-        <h1>Cloudbox</h1>
-
-        <div id="searchBox"></div>
-
-        <div class="spacer"></div>
+    <div id="container">
+        <div id="wrapper">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--a class="navbar-brand" href="#">Brand</a-->
+                        <div id="searchBox"></div>
+                        <div id="player"></div>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul id="main-menu" class="nav navbar-nav">
+                            <li class="hidden-xs nav-spacer"></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </nav>
+            <div class="bodypaddingtop">&nbsp;</div>
+            <div id="kanso-topbar"></div>
+            <ul id="page-menu" class="nav nav-pills"></ul>
+            <div id="content">
+                <div id="inner-content">
+                    <div id="account"></div>
+                    <div id="list"></div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div id="aboutLinkContainer">
+                <a href="" id="aboutLink">About</a>
+            </div>
+            <p>Powered by <a href="https://github.com/johnko/kanso-music">Cloudbox</a>.</p>
+        </footer>
     </div>
 
-    <div id="account"></div>
-
-    <div id="list"></div>
-
-    <div id="aboutLinkContainer">
-        <a href="" id="aboutLink">About</a>
-    </div>
 
     <div id="about" style="display:none">
         <a href="" id="aboutCloseLink">Close</a>
@@ -67,7 +92,7 @@
     <script src="./static/js/bootstrap.min.js"></script>
 
     <!-- modules for require -->
-    <script src="./modules.js"></script>
+    <script src="./_ddoc/modules.js"></script>
 
     <script>
         // in case the above don't load
@@ -76,55 +101,8 @@
 
     </script>
     <script src="./vendor/couchapp/loader.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        /*
-        var splitUrl = document.location.href.split('/');
-        var designPos = splitUrl.indexOf('_design');
-        if (designPos > 4) {
-            var newPrefix = "";
-            for (var i = 3; i < (designPos - 1); i++) {
-                newPrefix += "/" + splitUrl[i];
-            }
-            $.couch.urlPrefix = newPrefix;
-        }
-        */
-
-        $.couch.urlPrefix = "./";
-        $.couch.app(function(app) {
-            var customAccount = $.extend(true, {}, app.ddoc.vendor.couchapp.evently.account, {
-                loggedOut: app.ddoc.vendor.couchapp.evently.account.loginForm
-            });
-
-            $("#account").evently(customAccount);
-
-            $("#player").evently("player", app);
-            $.evently.connect("#account", "#player", ["loggedIn", "loggedOut"]);
-
-            $("#list").evently("list", app);
-            $.evently.connect("#account", "#list", ["loggedIn", "loggedOut"]);
-
-            $.evently.connect("#list", "#player", ["play"]);
-            $.evently.connect("#player", "#list", ["next", "previous"]);
-
-            $("#searchBox").evently("searchBox", app);
-            $.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
-            $.evently.connect("#searchBox", "#list", ["setList"]);
-        }, {
-            db: "_db",
-            design: "music"
-        });
-
-        $('#aboutLink').click(function(e) {
-            $('#about').fadeIn();
-            e.preventDefault();
-        });
-
-        $('#aboutCloseLink').click(function(e) {
-            $('#about').fadeOut();
-            e.preventDefault();
-        });
-
-    </script>
+    <!-- for cloudbox evently -->
+    <script src="./static/js/cloudbox.js"></script>
 </body>
 
 </html>

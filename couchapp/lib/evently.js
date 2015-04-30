@@ -113,7 +113,7 @@ exports.player = {
             var div = this.get()[0];
             $(this).data('player', div.getElementsByTagName('audio')[0]);
         },
-        mustache: "<img>\n<a class=\"prevButton\" href=\"\">&lt;&lt;</a>\n<audio controls=\"controls\">You'd better get an HTML5-compliant browser!</audio>\n<a class=\"nextButton\" href=\"\">&gt;&gt;</a>",
+        mustache: "<img style=\"visibility: hidden;\" src=\"./\"/>\n<a class=\"prevButton\" href=\"\">&lt;&lt;</a><a class=\"nextButton\" href=\"\">&gt;&gt;</a>\n<audio controls=\"controls\">You'd better get an HTML5-compliant browser!</audio>",
         selectors: {
             "a.nextButton": {
                 click: function(e) {
