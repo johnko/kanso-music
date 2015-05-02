@@ -60,40 +60,36 @@
     height: 1px;
 }
 
+.username {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#kanso-topbar-session {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#kanso-topbar-session ul {
+    display: inline;
+    padding: 0;
+}
+
+.kanso-topbar-logout {
+    display: inline-block;
+}
+
+.kanso-topbar-login {
+    display: none;
+}
+
 @media (max-width: 600px) {
-    #kanso-topbar-session {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-    .kanso-topbar-login {
-        display: block;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-    #kanso-topbar-login-dropdown {
-        border: 1px solid transparent;
-        border-radius: 4px;
-        background: #F8F8F8;
-        border-color: #E7E7E7;
-        position: relative;
-        left: 10px;
-        top: -50px;
-        padding: 10px;
-        float: left;
-    }
-    .username {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
     #kanso-topbar-session ul {
         display: inline;
         padding: 0;
     }
-    .kanso-topbar-logout {
-        display: inline-block;
-    }
 }
-
+/*
 @media (min-width: 601px) {
     #kanso-topbar-login-dropdown {
         border: 1px solid transparent;
@@ -105,39 +101,17 @@
         top: -1px;
         padding: 10px;
     }
-    .kanso-topbar-login a, .kanso-topbar-logout a {
-        float: right;
-    }
 }
-
+*/
+/*
 @media (min-width: 601px) {
-    #kanso-topbar-session {
-        position: absolute;
-        right: 0;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        z-index: 1;
-        padding-right: 5em;
-        top: inherit;
-    }
-    .kanso-topbar-login, .kanso-topbar-logout {
-        display: block;
-        position: absolute;
-        top: 1em;
-        right: 0;
-    }
-    .username {
-        display: block;
-        position: absolute;
-        top: 1.5em;
-        right: 6em;
-    }
     #kanso-topbar-session ul {
         display: inline-block;
         padding: 0;
         margin: 0;
     }
 }
+*/
 
 .kanso-topbar-field label {
     float: left;

@@ -1,28 +1,4 @@
 exports.list = {
-    next: function(e) {
-        var currentSong = $('.nowPlaying');
-        if (!currentSong) return;
-
-        var nextElement = currentSong.next('.song');
-        if (nextElement.length === 0) return;
-
-        $(this).trigger('play', nextElement.data('doc'));
-    },
-    play: function(e, doc) {
-        $('.nowPlaying').removeClass('nowPlaying');
-        $('#song_' + doc._id).addClass('nowPlaying');
-
-        /* TO BE BOUND TO PLAYER WIDGET PLAY */
-    },
-    previous: function(e) {
-        var currentSong = $('.nowPlaying');
-        if (!currentSong) return;
-
-        var previousElement = currentSong.prev('.song');
-        if (previousElement.length === 0) return;
-
-        $(this).trigger('play', previousElement.data('doc'));
-    },
     loggedIn: {
         after: function(data) {
             var doc;
@@ -46,20 +22,25 @@ exports.list = {
         after: function(e, data) {
             var prefix = $$(this).app.db.uri;
             var doc;
+            var imgextensions = ['jpg', 'png', 'gif'];
 
             for (var i = 0; i < data.length; i++) {
                 doc = data[i];
-
+                doc.supplied = '';
                 if (doc._attachments) {
                     for (var name in doc._attachments) {
-                        if (!doc.url && name.substring(name.length - 3) == 'mp3') {
-                            doc.url = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
-                        } else if (!doc.coverUrl && name.substring(0, 5) == 'cover') {
-                            doc.coverUrl = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                        if (doc.track) delete doc['track'];;
+                        if (!doc.mp3 && name.substring(name.length - 3) == 'mp3') {
+                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                            if (doc.supplied.length > 1) {
+                                doc.supplied += ', ';
+                            }
+                            doc.supplied += 'mp3';
+                        } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 3).toLowerCase()) > -1) {
+                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
                         }
                     }
                 }
-
                 $('#song_' + doc._id).data('doc', doc);
             }
         },
@@ -79,7 +60,13 @@ exports.list = {
         selectors: {
             "tr.song": {
                 click: function(e) {
-                    $(this).trigger('play', $(this).data('doc'));
+                    var doc = $(this).data('doc');
+                    var myPlaylist = $("#player").data('myPlaylist');
+                    //console.log(myPlaylist);
+                    myPlaylist.add(doc);
+                    if (myPlaylist.play) {
+                        myPlaylist.play();
+                    }
                 }
             }
         }
@@ -87,57 +74,93 @@ exports.list = {
 };
 
 exports.player = {
-    play: function(e, doc) {
-        var player = $(this).data('player');
-        var cover = $('img', this);
-
-        if (player.stop)
-            player.stop();
-
-        if (doc) {
-            player.src = doc.url;
-            player.load();
-
-            if (doc.coverUrl)
-                cover.attr('src', doc.coverUrl);
-
-            cover.css('visibility', doc.coverUrl ? 'visible' : 'hidden');
-        }
-
-        if (player.play)
-            player.play();
-    },
     loggedIn: {
         after: function(e) {
-            /* we will need to access the raw AUDIO element contained in the widget */
-            var div = this.get()[0];
-            $(this).data('player', div.getElementsByTagName('audio')[0]);
+            var myPlaylist = new jPlayerPlaylist({
+                jPlayer: "#jquery_jplayer_N",
+                cssSelectorAncestor: "#jp_container_N"
+            }, [], {
+                playlistOptions: {
+                    autoPlay: true,
+                    enableRemoveControls: true
+                },
+                swfPath: "./vendor/jplayer/jplayer",
+                supplied: "m4a, oga, mp3",
+                useStateClassSkin: true,
+                autoBlur: true,
+                smoothPlayBar: false,
+                keyEnabled: true,
+                audioFullScreen: false,
+                volume: 1
+            });
+            $("#player").data('myPlaylist', myPlaylist);
         },
-        mustache: "<img style=\"visibility: hidden;\" src=\"./\"/>\n<a class=\"prevButton\" href=\"\">&lt;&lt;</a><a class=\"nextButton\" href=\"\">&gt;&gt;</a>\n<audio controls=\"controls\">You'd better get an HTML5-compliant browser!</audio>",
+        mustache: "<br/>" +
+            //'<div id="jp_container_N" class="jp-video jp-video-270p" role="application" aria-label="media player">' +
+            '<div id="jp_container_N" class="jp-audio" role="application" aria-label="media player">' +
+            '	<div class="jp-type-playlist">' +
+            '		<div id="jquery_jplayer_N" class="jp-jplayer"></div>' +
+            '		<div class="jp-gui jp-interface">' +
+            '			<div class="jp-volume-controls">' +
+            '				<button class="jp-mute" role="button" tabindex="0">mute</button>' +
+            '				<button class="jp-volume-max" role="button" tabindex="0">max volume</button>' +
+            '				<div class="jp-volume-bar">' +
+            '					<div class="jp-volume-bar-value"></div>' +
+            '				</div>' +
+            '			</div>' +
+            '			<div class="jp-controls-holder">' +
+            '				<div class="jp-controls">' +
+            '					<button class="jp-previous" role="button" tabindex="0">previous</button>' +
+            '					<button class="jp-play" role="button" tabindex="0">play</button>' +
+            '					<button class="jp-stop" role="button" tabindex="0">stop</button>' +
+            '					<button class="jp-next" role="button" tabindex="0">next</button>' +
+            '				</div>' +
+            '				<div class="jp-progress">' +
+            '					<div class="jp-seek-bar">' +
+            '						<div class="jp-play-bar"></div>' +
+            '					</div>' +
+            '				</div>' +
+            '				<div class="jp-current-time" role="timer" aria-label="time"></div>' +
+            '				<div class="jp-duration" role="timer" aria-label="duration"></div>' +
+            '				<div class="jp-toggles">' +
+            '					<button class="jp-repeat" role="button" tabindex="0">repeat</button>' +
+            '					<button class="jp-shuffle" role="button" tabindex="0">shuffle</button>' +
+            '				</div>' +
+            '			</div>' +
+            '		</div>' +
+            '		<div class="jp-playlist">' +
+            '			<ul>' +
+            '				<!-- The method Playlist.displayPlaylist() uses this unordered list -->' +
+            '				<li>&nbsp;</li>' +
+            '			</ul>' +
+            '		</div>' +
+            '		<div class="jp-no-solution">' +
+            '			<span>Update Required</span>' +
+            '			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.' +
+            '		</div>' +
+            '	</div>' +
+            '</div>',
         selectors: {
-            "a.nextButton": {
-                click: function(e) {
-                    $(this).trigger('next');
-                    return false;
-                }
-            },
             "audio": {
                 ended: function(e) {
                     $(this).trigger('next');
                 }
             },
-            "a.prevButton": {
-                click: function(e) {
-                    $(this).trigger('previous');
-                    return false;
-                }
-            }
         }
     },
     loggedOut: {
         "mustache": "_"
     },
 };
+
+exports.libraryTitle = {
+    loggedOut: {
+        mustache: "_"
+    },
+    loggedIn: {
+        mustache: "<h2>Library</h2>"
+    }
+}
 
 exports.searchBox = {
     search: function(e, query) {

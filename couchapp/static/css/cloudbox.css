@@ -13,10 +13,65 @@ footer {
 }
 /*** Cloudbox ***/
 
+#jp_container_N {}
+
+.jp-interface {
+    position: inherit !important;
+}
+
+.jp-audio {
+    width: 241px !important;
+    padding: 10px !important;
+    border: none !important;
+}
+
+.jp-controls-holder {
+    top: 0px;
+    position: absolute;
+    left: 0px;
+}
+
+.jp-controls {
+    height: 36px !important;
+}
+
+.jp-progress {
+    width: 201px !important;
+    height: 12px !important;
+}
+
+.jp-volume-controls {
+    left: 200px;
+    position: relative;
+    top: 0;
+    width: 100px;
+}
+
+.jp-volume-bar {
+    width: 101px !important;
+}
+
+.jp-audio, .jp-interface, .jp-playlist {
+    background-color: #222 !important;
+}
+
+.jp-playlist {
+    top: 0px;
+    width: 50%;
+    padding: 0px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 152px;
+    position: absolute;
+    right: 0;
+}
+
 .navbar {
     position: fixed;
     top: 1em;
     left: 1em;
+    border: none !important;
+    border-radius: 0 !important;
 }
 
 @media (max-width: 991px) {
@@ -32,15 +87,12 @@ footer {
 }
 
 .bodypaddingtop {
-    height: 4.5em;
+    height: 6em;
 }
 
 @media (min-width: 601px) {
     #page-menu {
         min-height: 4em;
-    }
-    #kanso-topbar-session {
-        right: 1em!important;
     }
 }
 
@@ -54,12 +106,6 @@ footer {
 @media (max-width: 767px) {
     #player audio {
         width: 45%;
-    }
-}
-
-@media (min-width: 768px) {
-    #player a, #player audio {
-        margin-top: 0.8em;
     }
 }
 
@@ -77,28 +123,18 @@ footer {
 
 #player img {
     float: left;
-    height: 3.6em;
-}
-
-#player a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em;
-    background-color: #555;
-    float: left;
-    /*	vertical-align:top;*/
-}
-
-#player a:hover {
-    background-color: #eee;
-    color: #111;
+    height: 4.4em !important;
+    width: auto !important;
+    position: absolute;
+    top: 0;
+    left: 340px;
 }
 /*** SEARCHBOX ***/
 
 #searchBox {
     float: right;
     width: 33%;
+    margin-top: 20px;
 }
 
 #searchBox input {
@@ -129,12 +165,6 @@ a#logoutLink {
     float: right;
 }
 /** song list **/
-/*tr.nowPlaying {
-    position: fixed;
-    top: 0;
-    left: 1.4em;
-    font-size: 0.7em;
-}*/
 
 #list table {
     clear: both;

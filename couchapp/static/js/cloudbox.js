@@ -18,7 +18,7 @@ $(document).ready(function() {
  *   }
  */
 
-$.couch.urlPrefix = "./";
+$.couch.urlPrefix = ".";
 $.couch.app(function(app) {
     var newLoggedOut = app.ddoc.vendor.couchapp.evently.account.loginForm;
     newLoggedOut.after = function(data) {
@@ -72,6 +72,9 @@ $.couch.app(function(app) {
     $("#searchBox").evently("searchBox", app);
     $.evently.connect("#account", "#searchBox", ["loggedIn", "loggedOut"]);
     $.evently.connect("#searchBox", "#list", ["setList"]);
+
+    $("#libraryTitle").evently("libraryTitle", app);
+    $.evently.connect("#account", "#libraryTitle", ["loggedIn", "loggedOut"]);
 
 }, {
     db: "_db",
