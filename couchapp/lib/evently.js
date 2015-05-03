@@ -160,7 +160,44 @@ exports.libraryTitle = {
     loggedIn: {
         mustache: "<h2>Library</h2>"
     }
-}
+};
+
+exports.pageMenu = {
+    loggedOut: {
+        mustache: "_"
+    },
+    loggedIn: {
+        mustache: "<li><a id=\"addallplaylist\" href=\"#\">Add all to playlist</a></li>\n" +
+            "<li><a id=\"clearplaylist\" href=\"#\">Clear playlist</a></li>\n",
+        selectors: {
+            "a#addallplaylist": {
+                click: function(e) {
+                    e.preventDefault();
+                    var myPlaylist = $("#player").data('myPlaylist');
+                    //var allsongs = [];
+                    var songrows = $("tr.song").each(function() {
+                        var row = $(this);
+                        var doc = row.data("doc");
+                        //allsongs.push(doc);
+                        myPlaylist.add(doc);
+                    });
+                    //myPlaylist.setPlaylist(allsongs);
+                    if (myPlaylist.play) {
+                        myPlaylist.play();
+                    }
+                }
+            },
+            "a#clearplaylist": {
+                click: function(e) {
+                    e.preventDefault();
+                    //$("#jquery_jplayer_N").jPlayer("stop");
+                    var myPlaylist = $("#player").data('myPlaylist');
+                    myPlaylist.setPlaylist([]);
+                }
+            },
+        }
+    }
+};
 
 exports.searchBox = {
     search: function(e, query) {

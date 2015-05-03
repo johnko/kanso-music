@@ -79,6 +79,9 @@ $.couch.app(function(app) {
     $("#libraryTitle").evently("libraryTitle", app);
     $.evently.connect("#account", "#libraryTitle", ["loggedIn", "loggedOut"]);
 
+    $("#page-menu").evently("pageMenu", app);
+    $.evently.connect("#account", "#page-menu", ["loggedIn", "loggedOut"]);
+
 }, {
     db: "_db",
     design: "music"

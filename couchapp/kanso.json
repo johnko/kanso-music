@@ -1,6 +1,6 @@
 {
     "name": "music",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "realname": "CloudBox",
     "description": "A couchapp made to enjoy music... relaxed on a couch.",
     "attachments": ["static", "vendor"],
