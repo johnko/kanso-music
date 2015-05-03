@@ -40,6 +40,9 @@ $.couch.app(function(app) {
                 $('#kanso-topbar-session .kanso-topbar-logout a').click(function(ev) {
                     ev.preventDefault();
                     elem.trigger('doLogout');
+                    setTimeout(function() {
+                        if (window.location.href.match(/\/_rewrite$/) === null) location.href = '/';
+                    }, 1000);
                     return false;
                 });
                 return {
