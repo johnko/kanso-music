@@ -4,35 +4,30 @@
 
 ### 0.1 : the basic couchapp
 
-* 2 fields : artist and title
-* playlist behavior : click to play, next/previous
-* fulltext search
+* [x] 2 fields : artist and title
+* [x] playlist behavior : click to play, next/previous
+* [ ] fulltext search (original cloudbox used lucene)
 
-### O.2 : improved importation tool
+### web drag & drop importation tool
 
-done:
-
-* nicer URLs
-* add more ID3 tags to our documents
-* Import & display song cover
-
-todo:
-
-* Select multiple files (or folders)
-* Index more search fields
-* Resize cover image (if easy with Flex)
-* Check if songs (from fulltext-search and views) are sorted correctly
-* Conflicts protections (double importations, id already taken, etc)
+* [ ] nicer URLs
+* [ ] add more ID3 tags to our documents
+* [ ] Import & display song cover
+* [ ] Select multiple files (or folders)
+* [ ] Index more search fields
+* [ ] Resize cover image (if easy with Flex)
+* [ ] Check if songs (from fulltext-search and views) are sorted correctly
+* [ ] Conflicts protections (double importations, id already taken, etc)
 
 ### Targeting 1.0
 
-* Artists and albums listings - filter by name and style
-* Import from iTunes lib, m3u lists ...
-* Install the couchapp from the importation tool
-* Complete and custom JS-controlled player
-* Field-specific search (search artist, title, album...)
-* Test on big library
+* [ ] Artists and albums listings - filter by name and style
+* [ ] Import from iTunes lib, m3u lists ...
+* [ ] Install the couchapp from the importation tool
+* [x] Complete and custom JS-controlled player
+* [ ] Field-specific search (search artist, title, album...)
+* [ ] Test on big library
 
 ## 2.0
 
-* Playlists, here you come!
+* [x] Playlists, here you come!
