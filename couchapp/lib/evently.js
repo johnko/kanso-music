@@ -22,22 +22,35 @@ exports.list = {
         after: function(e, data) {
             var prefix = $$(this).app.db.uri;
             var doc;
-            var imgextensions = ['jpg', 'png', 'gif'];
+            var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
 
             for (var i = 0; i < data.length; i++) {
                 doc = data[i];
                 doc.supplied = '';
                 if (doc._attachments) {
-                    for (var name in doc._attachments) {
-                        if (doc.track) delete doc['track'];;
-                        if (!doc.mp3 && name.substring(name.length - 3) == 'mp3') {
-                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    for (var name2 in doc._attachments) {
+                        if (doc.track) delete doc.track;
+                        if (!doc.mp3 && name2.substring(name2.length - 4) == '.mp3') {
+                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name2);
                             if (doc.supplied.length > 1) {
                                 doc.supplied += ', ';
                             }
                             doc.supplied += 'mp3';
-                        } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 3).toLowerCase()) > -1) {
-                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                        } else if (!doc.poster && imgextensions.indexOf(name2.substring(name2.length - 4).toLowerCase()) > -1) {
+                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name2);
+                        }
+                    }
+                } else if (doc.dtfc) {
+                    for (var name in doc.dtfc) {
+                        if (doc.track) delete doc.track;
+                        if (!doc.mp3 && name.substring(name.length - 4) == '.mp3') {
+                            doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
+                            if (doc.supplied.length > 1) {
+                                doc.supplied += ', ';
+                            }
+                            doc.supplied += 'mp3';
+                        } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                            doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
                         }
                     }
                 }
