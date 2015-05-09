@@ -5,7 +5,7 @@
 #export COUCHDBURL=http://localhost:5984/cloudbox
 [ "x" == "x${COUCHDBURL}" ] && exit 1
 
-#export DTFCURL=http://localhost:5984/dtfc
+#export DTFCURL=http://localhost:8080/dtfc
 [ "x" == "x${DTFCURL}" ] && exit 1
 
 # Expect arg
