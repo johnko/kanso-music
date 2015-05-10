@@ -18,7 +18,4 @@ FOLDER="$1"
 echo "${FOLDER}"
 
 # Now call parse-and-upload-file for every file
-find "${FOLDER}" -maxdepth 3 -type f \
-| while read line ; do
-    sh parse-and-upload-file-dtfc.sh "$line"
-done
+find "${FOLDER}" -maxdepth 3 -type f -exec sh parse-and-upload-file-dtfc.sh {} \;
