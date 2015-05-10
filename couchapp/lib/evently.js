@@ -181,7 +181,10 @@ exports.pageMenu = {
     },
     loggedIn: {
         mustache: "<li><a id=\"addallplaylist\" href=\"#\">Add all to playlist</a></li>\n" +
-            "<li><a id=\"clearplaylist\" href=\"#\">Clear playlist</a></li>\n",
+            "<li><a id=\"clearplaylist\" href=\"#\">Clear playlist</a></li>\n" +
+            "<li><a id=\"searchartist\" href=\"#\">Search Artist</a></li>\n" +
+            "<li><a id=\"searchtitle\" href=\"#\">Search Title</a></li>\n" +
+            "<li><a id=\"searchalbum\" href=\"#\">Search Album</a></li>\n",
         selectors: {
             "a#addallplaylist": {
                 click: function(e) {
@@ -208,6 +211,30 @@ exports.pageMenu = {
                     myPlaylist.setPlaylist([]);
                 }
             },
+            "a#searchartist": {
+                click: function(e) {
+                    e.preventDefault();
+                    var tmp = $("#searchinput").val().replace("album:", "").replace("artist:", "").replace("title:", "").replace("Search...", "");
+                    $("#searchinput").val("artist:" + tmp);
+                    $("#searchinput").trigger('search', $("#searchinput").val());
+                }
+            },
+            "a#searchtitle": {
+                click: function(e) {
+                    e.preventDefault();
+                    var tmp = $("#searchinput").val().replace("album:", "").replace("artist:", "").replace("title:", "").replace("Search...", "");
+                    $("#searchinput").val("title:" + tmp);
+                    $("#searchinput").trigger('search', $("#searchinput").val());
+                }
+            },
+            "a#searchalbum": {
+                click: function(e) {
+                    e.preventDefault();
+                    var tmp = $("#searchinput").val().replace("album:", "").replace("artist:", "").replace("title:", "").replace("Search...", "");
+                    $("#searchinput").val("album:" + tmp);
+                    $("#searchinput").trigger('search', $("#searchinput").val());
+                }
+            }
         }
     }
 };
@@ -259,7 +286,7 @@ exports.searchBox = {
         mustache: "_"
     },
     loggedIn: {
-        mustache: "<input value='Search...'/>",
+        mustache: "<input id=\"searchinput\" value=\"Search...\"/>",
         selectors: {
             "input": {
                 focus: function(e) {
