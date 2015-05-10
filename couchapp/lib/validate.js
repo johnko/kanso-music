@@ -8,8 +8,11 @@ module.exports = function(newDoc, oldDoc, userCtx) {
     }
     if (!user_is("_admin")) {
         // user is not admin, check _id
-        if (newDoc._id && oldDoc._id && newDoc._id == oldDoc._id) throw ({
-            forbidden: "Restricted: Not allowed to modify."
-        });
+        if (oldDoc !== null) {
+            // olddoc is not null, we are modifying
+            if (newDoc._id && oldDoc._id && newDoc._id == oldDoc._id) throw ({
+                forbidden: "Restricted: Not allowed to modify."
+            });
+        }
     }
 };
