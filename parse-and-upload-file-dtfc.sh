@@ -93,6 +93,11 @@ else
     fi
 fi
 
+# Check if hash already exists in DTFC
+if curl -v -s -k -H 'Connection: close' -X HEAD "${DTFCURL}/${HEXHASH}" 2>&1 | grep '200 OK' ; then
+    exit 0
+fi
+
 # put first to get doc.rev
 REV=`curl -k -X PUT --data-binary @"${FILE}" "${DTFCURL}/${SAFENAME}"`
 
