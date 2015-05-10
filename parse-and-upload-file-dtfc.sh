@@ -15,7 +15,7 @@
 FILE="$1"
 [ ! -f "${FILE}" ] && exit 1
 
-echo "${FILE}"
+#echo "${FILE}"
 
 SAFENAME=`echo ${FILE##*/} | tr ' ' '_' | tr -cd '[[:alnum:]]._-' | tr '[' '-' | tr ']' '-' `
 
@@ -61,6 +61,16 @@ HEXHASH=`openssl dgst -sha512 -hex "${FILE}" | awk '{print $NF}'`
 # Hash with sha512 to base64 (smaller for JSON)
 BHASH=`openssl dgst -sha512 -binary "${FILE}" | openssl enc -base64 | tr -d '\n'`
 
+
+# Check if hash already exists in DTFC
+if curl -v -s -k -H 'Connection: close' -X HEAD "${DTFCURL}/${HEXHASH}" 2>&1 | grep '200 OK' >/dev/null ; then
+    if curl -v -s -k -H 'Connection: close' -X HEAD "${COUCHDBURL}/${HEXHASH}" 2>&1 | grep '200 OK' >/dev/null ; then
+        exit 0
+    fi
+fi
+
+echo "${FILE}"
+
 # Set the upload type
 if echo "${MIME}" | grep "audio/mpeg" >/dev/null ; then
     # mp3
@@ -83,7 +93,7 @@ elif echo "${MIME}" | grep "audio/x-flac" >/dev/null ; then
     TYPE=flac
     getmeta
 else
-    if echo ${SAFENAME} | tr '[A-Z]' '[a-z]' | grep 'mp3$' ; then
+    if echo "${SAFENAME}" | tr '[A-Z]' '[a-z]' | grep 'mp3$' >/dev/null ; then
         # probably mp3
         TYPE=song
         getmeta
@@ -91,11 +101,6 @@ else
         echo "Not sure what it is, improper metadata"
         exit 1
     fi
-fi
-
-# Check if hash already exists in DTFC
-if curl -v -s -k -H 'Connection: close' -X HEAD "${DTFCURL}/${HEXHASH}" 2>&1 | grep '200 OK' ; then
-    exit 0
 fi
 
 # put first to get doc.rev
