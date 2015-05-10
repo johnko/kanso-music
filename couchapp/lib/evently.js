@@ -221,7 +221,7 @@ exports.searchBox = {
             reqUrl = "./_ddoc/_view/songs?include_docs=true";
         } else {
             var regexpartist = new RegExp("^artist:");
-            var regexpalbum = new RegExp("^artist:");
+            var regexpalbum = new RegExp("^album:");
             if (regexpartist.test(query)) {
                 query = query.replace("artist:", "");
                 view = "artists";
