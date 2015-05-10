@@ -17,7 +17,7 @@ FILE="$1"
 
 echo "${FILE}"
 
-SAFENAME=`echo ${FILE##*/} | tr ' ' '_' | tr -cd '[[:alnum:]]._-' `
+SAFENAME=`echo ${FILE##*/} | tr ' ' '_' | tr -cd '[[:alnum:]]._-' | tr '[' '-' | tr ']' '-' `
 
 ffmetadata() {
     ffmpeg -i "${FILE}" -f ffmetadata -vn -an -loglevel quiet -
