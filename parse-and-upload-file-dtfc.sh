@@ -83,8 +83,14 @@ elif echo "${MIME}" | grep "audio/x-flac" >/dev/null ; then
     TYPE=flac
     getmeta
 else
-    echo "Not sure what it is, improper metadata"
-    exit 1
+    if echo ${SAFENAME} | tr '[A-Z]' '[a-z]' | grep 'mp3$' ; then
+        # probably mp3
+        TYPE=song
+        getmeta
+    else
+        echo "Not sure what it is, improper metadata"
+        exit 1
+    fi
 fi
 
 # put first to get doc.rev
