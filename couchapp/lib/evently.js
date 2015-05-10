@@ -222,12 +222,16 @@ exports.searchBox = {
         } else {
             var regexpartist = new RegExp("^artist:");
             var regexpalbum = new RegExp("^album:");
+            var regexptitle = new RegExp("^title:");
             if (regexpartist.test(query)) {
                 query = query.replace("artist:", "");
                 view = "artists";
             } else if (regexpalbum.test(query)) {
                 query = query.replace("album:", "");
                 view = "albums";
+            } else if (regexptitle.test(query)) {
+                query = query.replace("title:", "");
+                view = "titles";
             }
             // search by title
             reqUrl = "./_ddoc/_view/" + view +

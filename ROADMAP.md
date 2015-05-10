@@ -25,8 +25,8 @@
 * [ ] Import from iTunes lib, m3u lists ...
 * [ ] Install the couchapp from the importation tool
 * [x] Complete and custom JS-controlled player
-* [ ] Field-specific search (search artist, title, album...)
-* [ ] Test on big library
+* [x] Field-specific search (search artist, title, album...)
+* [x] Test on big library
 
 ## 2.0
 
