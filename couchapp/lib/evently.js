@@ -215,12 +215,23 @@ exports.pageMenu = {
 exports.searchBox = {
     search: function(e, query) {
         var reqUrl;
+        var view = "titles";
         if (!query || query === '') {
             // show all songs
             reqUrl = "./_ddoc/_view/songs?include_docs=true";
         } else {
+            var regexpartist = new RegExp("^artist:");
+            var regexpalbum = new RegExp("^artist:");
+            if (regexpartist.test(query)) {
+                query = query.replace("artist:", "");
+                view = "artists";
+            } else if (regexpalbum.test(query)) {
+                query = query.replace("album:", "");
+                view = "albums";
+            }
             // search by title
-            reqUrl = "./_ddoc/_view/titles?startkey=" + encodeURIComponent('"' + query.toLowerCase() + '"') +
+            reqUrl = "./_ddoc/_view/" + view +
+                "?startkey=" + encodeURIComponent('"' + query.toLowerCase() + '"') +
                 "&endkey=" + encodeURIComponent('"' + query.toUpperCase() + '\\ufff0' + '"') +
                 "&include_docs=true";
         }
