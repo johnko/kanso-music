@@ -5,7 +5,7 @@ module.exports = {
     /*updates: require('./updates'),*/
     filters: require('./filters'),
     rewrites: require('./rewrites'),
-    /*validate_doc_update: require('./validate'),*/
+    validate_doc_update: require('./validate'),
     evently: require('./evently'),
     fulltext: require('./fulltext'),
     vendor: require('./vendor'),
