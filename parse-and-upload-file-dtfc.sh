@@ -33,13 +33,13 @@ disc=1/1
 }
 
 getmeta() {
-      ARTIST="`ffmetadata|grep '^artist='       |sed 's/^artist=//'      |tr '"' "'"`"
-       TITLE="`ffmetadata|grep '^title='        |sed 's/^title=//'       |tr '"' "'"`"
-       ALBUM="`ffmetadata|grep '^album='        |sed 's/^album=//'       |tr '"' "'"`"
-ALBUM_ARTIST="`ffmetadata|grep '^album_artist=' |sed 's/^album_artist=//'|tr '"' "'"`"
-       GENRE="`ffmetadata|grep '^genre='        |sed 's/^genre=//'       |tr '"' "'"`"
-       TRACK="`ffmetadata|grep '^track='        |sed 's/^track=//'       |tr '"' "'"`"
-        DISC="`ffmetadata|grep '^disc='         |sed 's/^disc=//'        |tr '"' "'"`"
+      ARTIST="`ffmetadata|grep '^artist='       |sed 's/^artist=//'      | sed 's/\\\=/_/g'| tr '"' "'"`"
+       TITLE="`ffmetadata|grep '^title='        |sed 's/^title=//'       | sed 's/\\\=/_/g'| tr '"' "'"`"
+       ALBUM="`ffmetadata|grep '^album='        |sed 's/^album=//'       | sed 's/\\\=/_/g'| tr '"' "'"`"
+ALBUM_ARTIST="`ffmetadata|grep '^album_artist=' |sed 's/^album_artist=//'| sed 's/\\\=/_/g'| tr '"' "'"`"
+       GENRE="`ffmetadata|grep '^genre='        |sed 's/^genre=//'       | sed 's/\\\=/_/g'| tr '"' "'"`"
+       TRACK="`ffmetadata|grep '^track='        |sed 's/^track=//'       | sed 's/\\\=/_/g'| tr '"' "'"`"
+        DISC="`ffmetadata|grep '^disc='         |sed 's/^disc=//'        | sed 's/\\\=/_/g'| tr '"' "'"`"
     [ "x" != "x${ARTIST}" ] &&             ARTIST="\"artist\":      \"${ARTIST}\","
     [ "x" != "x${TITLE}" ] &&               TITLE="\"title\":       \"${TITLE}\","
     [ "x" != "x${ALBUM}" ] &&               ALBUM="\"album\":       \"${ALBUM}\","
@@ -107,11 +107,13 @@ fi
 REV=`curl -k -X PUT --data-binary @"${FILE}" "${DTFCURL}/${SAFENAME}"`
 
 # Set the JSON doc data
-JSON="{\"_id\":\"${BHASH}\",${ARTIST}${TITLE}${ALBUM}${ALBUM_ARTIST}${GENRE}${TRACK}${DISC}\"type\":\"${TYPE}\",\"content_type\":\"${MIME}\",\"dtfc\":{\"${SAFENAME}\":${REV}}}"
+JSON="{\"_id\":\"${HEXHASH}\",${ARTIST}${TITLE}${ALBUM}${ALBUM_ARTIST}${GENRE}${TRACK}${DISC}\"type\":\"${TYPE}\",\"content_type\":\"${MIME}\",\"dtfc\":{\"${SAFENAME}\":${REV}}}"
 
 # not upload file data
 if [ "x" == "x${REV}" ]; then
     echo "Something went wrong"
 else
-    curl -k -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH} | tr -d '\n' | egrep -o '"rev":"(.*)"' | awk -F'"' '{print $4}'
+    echo "${JSON}"
+    curl -k -s -H 'Content-type: application/json' -X PUT -d "${JSON}" ${COUCHDBURL}/${HEXHASH}
+    # | tr -d '\n' | egrep -o '"rev":"(.*)"' | awk -F'"' '{print $4}'
 fi
