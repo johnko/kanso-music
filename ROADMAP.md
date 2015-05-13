@@ -31,3 +31,5 @@
 ## 2.0
 
 * [x] Playlists, here you come!
+* [ ] Save playlist (owner, name of list, Private(share with user names) / Public)
+* [ ] Load playlist
