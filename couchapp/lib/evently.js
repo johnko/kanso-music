@@ -20,38 +20,43 @@ exports.list = {
     },
     setList: {
         after: function(e, data) {
+            // start of function setDOCmp3ANDposter
+            function setDOCmp3ANDposter(doc, name, type, prefix) {
+                var mp3extensions = ['.mp3'];
+                var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
+                if (doc.track) delete doc.track;
+                if (!doc.mp3 && mp3extensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                    if (type == "dtfc") {
+                        doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
+                    } else if (type == "attachments") {
+                        doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    }
+                    if (doc.supplied.length > 1) {
+                        doc.supplied += ', ';
+                    }
+                    doc.supplied += 'mp3';
+                } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                    if (type == "dtfc") {
+                        doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
+                    } else if (type == "attachments") {
+                        doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    }
+                }
+                return doc;
+            }
+            // end of function setDOCmp3ANDposter
             var prefix = $$(this).app.db.uri;
             var doc;
-            var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
-
             for (var i = 0; i < data.length; i++) {
                 doc = data[i];
                 doc.supplied = '';
                 if (doc._attachments) {
                     for (var name2 in doc._attachments) {
-                        if (doc.track) delete doc.track;
-                        if (!doc.mp3 && name2.substring(name2.length - 4) == '.mp3') {
-                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name2);
-                            if (doc.supplied.length > 1) {
-                                doc.supplied += ', ';
-                            }
-                            doc.supplied += 'mp3';
-                        } else if (!doc.poster && imgextensions.indexOf(name2.substring(name2.length - 4).toLowerCase()) > -1) {
-                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name2);
-                        }
+                        doc = setDOCmp3ANDposter(doc, name2, "attachments", prefix);
                     }
                 } else if (doc.dtfc) {
                     for (var name in doc.dtfc) {
-                        if (doc.track) delete doc.track;
-                        if (!doc.mp3 && name.substring(name.length - 4) == '.mp3') {
-                            doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
-                            if (doc.supplied.length > 1) {
-                                doc.supplied += ', ';
-                            }
-                            doc.supplied += 'mp3';
-                        } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
-                            doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
-                        }
+                        doc = setDOCmp3ANDposter(doc, name, "dtfc", null);
                     }
                 }
                 $('#song_' + doc._id).data('doc', doc);
