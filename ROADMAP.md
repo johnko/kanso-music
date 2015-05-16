@@ -32,4 +32,10 @@
 
 * [x] Playlists, here you come!
 * [ ] Save playlist (owner, name of list, Private(share with user names) / Public)
+  * Hint: extract current playlist with $("#player").data("myPlaylist").playlist
 * [ ] Load playlist
+* [ ] Heart
+* [ ] Pinned to top of library
+* [ ] Rating
+* [ ] Comments
+* [ ] Permalink to playback time
