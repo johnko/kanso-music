@@ -30,10 +30,11 @@
 
 ## 2.0
 
-* [x] Playlists, here you come!
+* [ ] Multi Playlists, here you come!
 * [ ] Save playlist (owner, name of list, Private(share with user names) / Public)
   * Hint: extract current playlist with $("#player").data("myPlaylist").playlist
 * [ ] Load playlist (personal)
+* [ ] Album is a playlist
 * [ ] shared playlist editing
 * [ ] Heart (public like)
 * [ ] Hide (personal hidden)
@@ -42,3 +43,4 @@
 * [ ] Comments (public)
 * [ ] Permalink to playback time
 * [ ] Keyboard Media Keys (play/pause/ff/rewind)
+* [ ] get info from Discogs API
