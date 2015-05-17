@@ -23,7 +23,7 @@
 
 * [ ] Artists and albums listings - filter by name and style
 * [ ] Import from iTunes lib, m3u lists ...
-* [ ] Install the couchapp from the importation tool
+* ~~Install the couchapp from the importation tool~~
 * [x] Complete and custom JS-controlled player
 * [x] Field-specific search (search artist, title, album...)
 * [x] Test on big library
@@ -33,9 +33,12 @@
 * [x] Playlists, here you come!
 * [ ] Save playlist (owner, name of list, Private(share with user names) / Public)
   * Hint: extract current playlist with $("#player").data("myPlaylist").playlist
-* [ ] Load playlist
-* [ ] Heart
-* [ ] Pinned to top of library
-* [ ] Rating
-* [ ] Comments
+* [ ] Load playlist (personal)
+* [ ] shared playlist editing
+* [ ] Heart (public like)
+* [ ] Hide (personal hidden)
+* [ ] Pin (personal pin)
+* [ ] 5 Star Rating (personal rating)
+* [ ] Comments (public)
 * [ ] Permalink to playback time
+* [ ] Keyboard Media Keys (play/pause/ff/rewind)

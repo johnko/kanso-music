@@ -43,7 +43,7 @@ footer {
 .jp-volume-controls {
     left: 200px;
     position: relative;
-    top: 0;
+    top: 13px;
     width: 100px;
 }
 
@@ -64,6 +64,18 @@ footer {
     max-height: 152px;
     position: absolute;
     right: 0;
+}
+
+div.jp-type-playlist div.jp-playlist li.jp-playlist-current {
+    position: fixed;
+    left: 240px;
+    top: 1.21em;
+}
+
+div.jp-type-playlist div.jp-playlist li.jp-playlist-current + li {
+    border-top: dashed 1px #E892E9;
+    margin-top: 10px !important;
+    padding-top: 10px;
 }
 
 .navbar {
