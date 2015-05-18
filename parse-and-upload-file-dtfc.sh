@@ -103,6 +103,10 @@ else
     fi
 fi
 
+# To test "GET" from a node that will pull from a peer, uncomment the next 2 lines
+#curl -k -s -o /dev/null ${DTFCURL}/${HEXHASH}
+#exit 0
+
 # put first to get doc.rev
 REV=`curl -k -X PUT --data-binary @"${FILE}" "${DTFCURL}/${SAFENAME}"`
 
