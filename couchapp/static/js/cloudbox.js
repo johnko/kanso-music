@@ -3,7 +3,19 @@ var kansotopbar = require('kanso-topbar');
 $(document).ready(function() {
     if (window.location.href.match(/\/_rewrite$/) !== null) location.href += '/';
 
+    $("#player").affix({
+        offset: {
+            top: 0
+        }
+    });
+
     kansotopbar.init();
+});
+
+$(window).on('resize', function(){
+      var win = $(this); //this = window
+      $(".col-sm-13").attr("style","width:"+(win.width()-$(".col-sm-0").width()-20)+"px");
+      $(".jp-playlist").attr("style","height:"+(win.height()-$(".jp-interface").height()-$(".jp-jplayer").height()-20)+"px");
 });
 
 /*

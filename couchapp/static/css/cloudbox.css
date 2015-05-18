@@ -1,146 +1,69 @@
-/*** GLOBAL ***/
+/*** Cloudbox ***/
 
-body {
-    margin: 1em;
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#inner-content {
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 footer {
     border-top: solid 1px #B3B3B3;
-    clear: both;
+    /*clear: both;*/
+
     padding: 1em 0;
-    margin: 3em 0 0 0;
+    margin: 3em 1em 0 1em;
     font-size: 0.6em;
 }
-/*** Cloudbox ***/
 
-#jp_container_N {}
+.col-sm-0 {
+    width: 250px;
+    float: left;
+    min-height: 100px;
+}
 
-.jp-interface {
-    position: inherit !important;
+.col-sm-13 {
+    float: left;
 }
 
 .jp-audio {
-    width: 241px !important;
-    padding: 10px !important;
-    border: none !important;
-}
-
-.jp-controls-holder {
-    top: 0;
-    position: absolute;
-    left: 0;
-}
-
-.jp-controls {
-    height: 36px !important;
+    width: 221px !important;
+    padding: 10px 10px !important;
 }
 
 .jp-progress {
     width: 201px !important;
-    height: 12px !important;
 }
 
-.jp-volume-controls {
-    left: 200px;
-    position: relative;
-    top: 13px;
-    width: 100px;
+#container, #wrapper, #content, #inner-content, .row, .col-sm-0, #player, #jp_container_N, .jp-type-playlist {
+    /*for playlist to get height of window*/
+
+    height: 100%;
 }
 
-.jp-volume-bar {
-    width: 101px !important;
+.jp-jplayer {
+    width: 200px !important;
+    height: 200px !important;
 }
 
-.jp-audio, .jp-interface, .jp-playlist {
-    background-color: #222 !important;
+.jp-jplayer img {
+    width: 200px !important;
+    height: 200px !important;
+    display: block !important;
 }
 
 .jp-playlist {
-    top: 0;
-    width: 50%;
-    padding: 0 10px;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 152px;
-    position: absolute;
-    right: 0;
-}
+    /*height: 80%;*/
 
-div.jp-type-playlist div.jp-playlist li.jp-playlist-current {
-    position: fixed;
-    left: 240px;
-    top: 1.21em;
-}
-
-div.jp-type-playlist div.jp-playlist li.jp-playlist-current + li {
-    border-top: dashed 1px #E892E9;
-    margin-top: 10px !important;
-    padding-top: 10px;
-}
-
-.navbar {
-    position: fixed;
-    top: 1em;
-    left: 1em;
-    border: none !important;
-    border-radius: 0 !important;
-    z-index: 1;
-}
-
-@media (max-width: 991px) {
-    .navbar {
-        width: 96%;
-    }
-}
-
-@media (min-width: 992px) {
-    .navbar {
-        width: 98%;
-    }
-}
-
-.bodypaddingtop {
-    height: 6em;
-}
-
-@media (min-width: 601px) {
-    #pageMenuWrapper {
-        min-height: 4em;
-    }
-}
-
-@media (min-width: 768px) {
-    .navbar-header {
-        float: none !important;
-    }
-}
-/*** PLAYER ***/
-
-@media (max-width: 767px) {
-    #player audio {
-        width: 45%;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    #player audio {
-        width: 52%;
-    }
-}
-
-@media (min-width: 992px) {
-    #player audio {
-        width: 54%;
-    }
-}
-
-#player img {
-    float: left;
-    height: 4.4em !important;
-    width: auto !important;
-    position: absolute;
-    top: 0;
-    left: 340px;
+    padding-right: 5px;
+    margin-right: -26px;
 }
 /*** SEARCHBOX ***/
 
@@ -179,7 +102,8 @@ a#logoutLink {
 /** song list **/
 
 #list table {
-    clear: both;
+    /*clear: both;*/
+
     width: 96%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -221,7 +145,7 @@ a#logoutLink {
 /*** ABOUT ***/
 
 #about {
-    background: #fff url('smallerBackgroundLogo.png') no-repeat fixed right bottom;
+    background: #fff;
     border: 2px solid #aaa;
     padding: 1em;
     position: fixed;

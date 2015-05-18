@@ -22,29 +22,29 @@ exports.list = {
         after: function(e, data) {
             // start of function setDOCmp3ANDposter
             function setDOCmp3ANDposter(doc, name, type, prefix) {
-                var mp3extensions = ['.mp3'];
-                var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
-                if (doc.track) delete doc.track;
-                if (!doc.mp3 && mp3extensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
-                    if (type == "dtfc") {
-                        doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
-                    } else if (type == "attachments") {
-                        doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    var mp3extensions = ['.mp3'];
+                    var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
+                    if (doc.track) delete doc.track;
+                    if (!doc.mp3 && mp3extensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                        if (type == "dtfc") {
+                            doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
+                        } else if (type == "attachments") {
+                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                        }
+                        if (doc.supplied.length > 1) {
+                            doc.supplied += ', ';
+                        }
+                        doc.supplied += 'mp3';
+                    } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                        if (type == "dtfc") {
+                            doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
+                        } else if (type == "attachments") {
+                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                        }
                     }
-                    if (doc.supplied.length > 1) {
-                        doc.supplied += ', ';
-                    }
-                    doc.supplied += 'mp3';
-                } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
-                    if (type == "dtfc") {
-                        doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
-                    } else if (type == "attachments") {
-                        doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
-                    }
+                    return doc;
                 }
-                return doc;
-            }
-            // end of function setDOCmp3ANDposter
+                // end of function setDOCmp3ANDposter
             var prefix = $$(this).app.db.uri;
             var doc;
             for (var i = 0; i < data.length; i++) {
@@ -112,9 +112,9 @@ exports.player = {
                 volume: 1
             });
             $("#player").data('myPlaylist', myPlaylist);
+            $(window).trigger('resize');
         },
-        mustache: "<br/>" +
-            //'<div id="jp_container_N" class="jp-video jp-video-270p" role="application" aria-label="media player">' +
+        mustache: " " +
             '<div id="jp_container_N" class="jp-audio" role="application" aria-label="media player">' +
             '	<div class="jp-type-playlist">' +
             '		<div id="jquery_jplayer_N" class="jp-jplayer"></div>' +
@@ -148,8 +148,7 @@ exports.player = {
             '		</div>' +
             '		<div class="jp-playlist">' +
             '			<ul>' +
-            '				<!-- The method Playlist.displayPlaylist() uses this unordered list -->' +
-            '				<li>&nbsp;</li>' +
+            '				<li></li>' +
             '			</ul>' +
             '		</div>' +
             '		<div class="jp-no-solution">' +
