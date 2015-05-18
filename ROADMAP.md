@@ -37,7 +37,6 @@
 * [ ] Album is a playlist
 * [ ] shared playlist editing
 * [ ] Heart (public like)
-* [ ] Hide (personal hidden)
 * [ ] Pin (personal pin)
 * [ ] 5 Star Rating (personal rating)
 * [ ] Comments (public)
