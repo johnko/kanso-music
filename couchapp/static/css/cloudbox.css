@@ -46,15 +46,14 @@ footer {
     height: 100%;
 }
 
-.jp-jplayer {
+.smallheight .jp-jplayer {
     width: 200px !important;
     height: 200px !important;
 }
 
-.jp-jplayer img {
+.smallheight .jp-jplayer img {
     width: 200px !important;
     height: 200px !important;
-    display: block !important;
 }
 
 .jp-playlist {

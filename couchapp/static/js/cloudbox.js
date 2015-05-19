@@ -12,10 +12,15 @@ $(document).ready(function() {
     kansotopbar.init();
 });
 
-$(window).on('resize', function(){
-      var win = $(this); //this = window
-      $(".col-sm-13").attr("style","width:"+(win.width()-$(".col-sm-0").width()-20)+"px");
-      $(".jp-playlist").attr("style","height:"+(win.height()-$(".jp-interface").height()-$(".jp-jplayer").height()-20)+"px");
+$(window).on('resize', function() {
+    var win = $(this); //this = window
+    if (win.height() > 700) {
+        $("#container").attr("class", "smallheight");
+    } else {
+        $("#container").attr("class", "");
+    }
+    $(".col-sm-13").attr("style", "width:" + (win.width() - $(".col-sm-0").width() - 20) + "px");
+    $(".jp-playlist").attr("style", "height:" + (win.height() - $(".jp-interface").height() - $(".jp-jplayer").height() - 20) + "px");
 });
 
 /*
