@@ -6,10 +6,16 @@ Actually, it's a couchapp using HTML5's audio tag. In the back-end the basic pri
 
 Music on a couch... relaxing ;)
 
+![](https://github.com/johnko/kanso-music/raw/master/screenshot.png)
+
 ## Requirements
 
-* CouchDB >=0.11 with couchdb-lucene (mapped as http://myhost/mydb/_fti)
+* CouchDB >=0.11
 * Couchapp >=0.6
-* Adobe AIR runtime (+ Adobe's AIR SDK >=1.5 if you want to compile the importation tool)
+
 
 MP3 is not supported by all HTML5 browsers. So far it works well on Safari 5, Firefox 3.6 and 4 can't read MP3s, Chrome 5 can "sometimes".
+
+## Removed Requirements
+* couchdb-lucene (mapped as http://myhost/mydb/_fti)
+* ImportationTool requires Adobe AIR runtime (+ Adobe's AIR SDK >=1.5 if you want to compile the importation tool)
