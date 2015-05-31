@@ -22,29 +22,40 @@ exports.list = {
         after: function(e, data) {
             // start of function setDOCmp3ANDposter
             function setDOCmp3ANDposter(doc, name, type, prefix) {
-                    var mp3extensions = ['.mp3'];
-                    var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
-                    if (doc.track) delete doc.track;
-                    if (!doc.mp3 && mp3extensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
-                        if (type == "dtfc") {
-                            doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
-                        } else if (type == "attachments") {
-                            doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
-                        }
-                        if (doc.supplied.length > 1) {
-                            doc.supplied += ', ';
-                        }
-                        doc.supplied += 'mp3';
-                    } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
-                        if (type == "dtfc") {
-                            doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
-                        } else if (type == "attachments") {
-                            doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
-                        }
+                var mp3extensions = ['.mp3'];
+                var m4aextensions = ['.m4a'];
+                var imgextensions = ['.jpg', 'jpeg', '.png', '.gif'];
+                if (doc.track) delete doc.track;
+                if (!doc.mp3 && mp3extensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                    if (type == "dtfc") {
+                        doc.mp3 = "/dtfc/" + doc.dtfc[name].sha512;
+                    } else if (type == "attachments") {
+                        doc.mp3 = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
                     }
-                    return doc;
+                    if (doc.supplied.length > 1) {
+                        doc.supplied += ', ';
+                    }
+                    doc.supplied += 'mp3';
+                } else if (!doc.m4a && m4aextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                    if (type == "dtfc") {
+                        doc.m4a = "/dtfc/" + doc.dtfc[name].sha512;
+                    } else if (type == "attachments") {
+                        doc.m4a = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    }
+                    if (doc.supplied.length > 1) {
+                        doc.supplied += ', ';
+                    }
+                    doc.supplied += 'm4a';
+                } else if (!doc.poster && imgextensions.indexOf(name.substring(name.length - 4).toLowerCase()) > -1) {
+                    if (type == "dtfc") {
+                        doc.poster = "/dtfc/" + doc.dtfc[name].sha512;
+                    } else if (type == "attachments") {
+                        doc.poster = prefix + encodeURIComponent(doc._id) + '/' + encodeURIComponent(name);
+                    }
                 }
-                // end of function setDOCmp3ANDposter
+                return doc;
+            }
+            // end of function setDOCmp3ANDposter
             var prefix = $$(this).app.db.uri;
             var doc;
             for (var i = 0; i < data.length; i++) {
@@ -74,7 +85,19 @@ exports.list = {
                 })
             };
         },
-        mustache: "<table>\n\t<tr>\n\t\t<th class='artist'>Artist</th>\n\t\t<th class='title'>Title</th>\n\t\t<th class='album'>Album</th>\n\t</tr>\n{{#songs}}\n\t<tr class=\"song {{rowClass}}\" id=\"song_{{_id}}\">\n\t\t<td class='artist'>{{artist}}</td>\n\t\t<td class='title'>{{title}}</td>\n\t\t<td class='album'>{{album}}</td>\n\t</tr>\n{{/songs}}\n</table>",
+        mustache: "<table><tr>" +
+            "<th class=\"artist\">Artist</th>" +
+            "<th class=\"title\">Title</th>" +
+            "<th class=\"album\">Album</th>" +
+            "<th class=\"type\">Type</th>" +
+            "</tr>" +
+            "{{#songs}}<tr class=\"song {{rowClass}}\" id=\"song_{{_id}}\">" +
+            "<td class=\"artist\">{{artist}}</td>" +
+            "<td class=\"title\">{{title}}</td>" +
+            "<td class=\"album\">{{album}}</td>" +
+            "<td class=\"type\">{{type}}</td>" +
+            "</tr>{{/songs}}" +
+            "</table>",
         selectors: {
             "tr.song": {
                 click: function(e) {
@@ -184,11 +207,11 @@ exports.pageMenu = {
         mustache: "_"
     },
     loggedIn: {
-        mustache: "<li><a id=\"addallplaylist\" href=\"#\">Add all to playlist</a></li>\n" +
-            "<li><a id=\"clearplaylist\" href=\"#\">Clear playlist</a></li>\n" +
-            "<li><a id=\"searchartist\" href=\"#\">Search Artist</a></li>\n" +
-            "<li><a id=\"searchtitle\" href=\"#\">Search Title</a></li>\n" +
-            "<li><a id=\"searchalbum\" href=\"#\">Search Album</a></li>\n",
+        mustache: "<li><a id=\"addallplaylist\" href=\"#\">Add all to playlist</a></li>" +
+            "<li><a id=\"clearplaylist\" href=\"#\">Clear playlist</a></li>" +
+            "<li><a id=\"searchartist\" href=\"#\">Search Artist</a></li>" +
+            "<li><a id=\"searchtitle\" href=\"#\">Search Title</a></li>" +
+            "<li><a id=\"searchalbum\" href=\"#\">Search Album</a></li>",
         selectors: {
             "a#addallplaylist": {
                 click: function(e) {

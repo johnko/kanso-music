@@ -75,7 +75,7 @@ echo "${FILE}"
 if echo "${MIME}" | grep "audio/mpeg" >/dev/null ; then
     # mp3
     # We can parse ID3
-    TYPE=song
+    TYPE=mp3
     getmeta
 elif echo "${MIME}" | grep "audio/mp4" >/dev/null ; then
     # m4a
@@ -95,7 +95,7 @@ elif echo "${MIME}" | grep "audio/x-flac" >/dev/null ; then
 else
     if echo "${SAFENAME}" | tr '[A-Z]' '[a-z]' | grep 'mp3$' >/dev/null ; then
         # probably mp3
-        TYPE=song
+        TYPE=mp3
         getmeta
     else
         echo "Not sure what it is, improper metadata"

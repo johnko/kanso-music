@@ -62,7 +62,7 @@ BHASH=`openssl dgst -sha512 -binary "${FILE}" | openssl enc -base64 | tr -d '\n'
 if echo "${MIME}" | grep "audio/mpeg" >/dev/null ; then
     # mp3
     # We can parse ID3
-    TYPE=song
+    TYPE=mp3
     getmeta
 elif echo "${MIME}" | grep "audio/mp4" >/dev/null ; then
     # m4a
